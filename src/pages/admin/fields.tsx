@@ -35,7 +35,18 @@ export function ImageField({ label, src, alt, onSrc, onAlt }: { label: string; s
     </div>
   )
 }
-export function PhotoList({ photos, update, placeholder }: { photos: { src: string; alt: string }[]; update: (fn: (l: { src: string; alt: string }[]) => void) => void; placeholder: string }) {
+const MIN_SLOTS = 10
+function EmptySlot({ n, onFile, disabled }: { n: number; onFile: (f: File) => void; disabled: boolean }) {
+  const id = useId()
+  return (
+    <div className="mb-3 flex items-center justify-between gap-3 rounded-xl border border-dashed border-stone-300 bg-white/60 p-3">
+      <span className="text-sm text-stone-500">Espaço livre: foto {n}</span>
+      <label htmlFor={id} className={`inline-flex min-h-10 items-center rounded-lg px-4 text-sm ${disabled ? 'cursor-not-allowed bg-stone-200 text-stone-400' : 'cursor-pointer bg-forest text-white hover:bg-forest-dark'}`}>Enviar foto</label>
+      <input id={id} type="file" accept="image/*" disabled={disabled} className="sr-only" onChange={(e) => { const f = e.target.files?.[0]; e.target.value = ''; if (f) onFile(f) }} />
+    </div>
+  )
+}
+export function PhotoList({ photos, update }: { photos: { src: string; alt: string }[]; update: (fn: (l: { src: string; alt: string }[]) => void) => void; placeholder?: string }) {
   const b = 'min-h-10 rounded border px-3 text-sm disabled:opacity-30'
   return (
     <>
@@ -49,6 +60,9 @@ export function PhotoList({ photos, update, placeholder }: { photos: { src: stri
           </div>
         </div>
       ))}
+      {Array.from({ length: Math.max(0, MIN_SLOTS - photos.length) }, (_, j) => <EmptySlot key={j} n={photos.length + j + 1} onFile={async (file) => {
+        try { const src = await fileToDataUrl(file); update((l) => { l.push({ src, alt: file.name.replace(/\.[^.]+$/, '') }) }) } catch { /* ignora arquivo inválido */ }
+      }} disabled={false} />)}
       <div className="flex flex-wrap items-center gap-3">
         <label className="inline-flex min-h-11 cursor-pointer items-center rounded-full bg-forest px-5 text-sm text-white hover:bg-forest-dark">
           + Enviar várias fotos
@@ -59,9 +73,8 @@ export function PhotoList({ photos, update, placeholder }: { photos: { src: stri
             if (imgs.length) update((l) => { l.push(...imgs) })
           }} />
         </label>
-        <button onClick={() => update((l) => { l.push({ src: placeholder, alt: 'Nova foto' }) })} className="min-h-11 rounded-full border border-forest px-5 text-sm text-forest hover:bg-forest hover:text-white">+ Adicionar espaço para foto</button>
       </div>
-      <p className="mt-2 text-xs text-stone-500">{photos.length} fotos. Não há limite de fotos; nesta demonstração, muitas fotos enviadas podem encher o armazenamento do navegador (as imagens são reduzidas automaticamente). Lembre de preencher o texto alternativo.</p>
+      <p className="mt-2 text-xs text-stone-500">{photos.length} de {Math.max(MIN_SLOTS, photos.length)} espaços preenchidos. Os espaços livres não aparecem no site. Não há limite de fotos; nesta demonstração, muitas fotos enviadas podem encher o armazenamento do navegador (as imagens são reduzidas automaticamente). Lembre de preencher o texto alternativo.</p>
     </>
   )
 }

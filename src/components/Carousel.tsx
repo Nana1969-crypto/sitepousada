@@ -2,7 +2,8 @@ import { useRef, useState, type KeyboardEvent } from 'react'
 import type { Photo } from '../content/defaultContent'
 
 /** Carrossel por rolagem com snap: funciona com deslizar no celular, setas, pontos e teclado (← →). */
-export function Carousel({ photos, label, priority }: { photos: Photo[]; label: string; priority?: boolean }) {
+export function Carousel({ photos: all, label, priority }: { photos: Photo[]; label: string; priority?: boolean }) {
+  const photos = all.filter((p) => p.src)
   const track = useRef<HTMLDivElement>(null)
   const [i, setI] = useState(0)
   const n = photos.length
