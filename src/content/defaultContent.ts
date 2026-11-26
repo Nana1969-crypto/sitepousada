@@ -25,7 +25,7 @@ export const defaultContent: SiteContent = {
     title: 'Seu refúgio particular em meio à natureza.',
     subtitle: 'Desacelere, respire o ar da serra e viva momentos especiais em nossas cabanas.',
     primaryCta: 'Consultar disponibilidade', secondaryCta: 'Conheça nossas cabanas',
-    image: '/fotos/hero-panorama-propriedade.jpg', imageAlt: 'Cabanas de madeira iluminadas entre árvores, com lago e montanhas da serra ao entardecer (imagem ilustrativa)',
+    image: '/fotos/hero-vista-aerea.jpg', imageAlt: 'Vista aérea da propriedade ao nascer do sol: cabanas de madeira no alto da colina, lago, quiosque e montanhas com névoa (imagem ilustrativa)',
   },
   about: {
     title: 'Um lugar para se reconectar.',
