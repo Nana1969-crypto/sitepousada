@@ -30,7 +30,7 @@ export const defaultContent: SiteContent = {
   about: {
     title: 'Um lugar para se reconectar.',
     text: 'Em meio à natureza da Serra Gaúcha, nossas cabanas foram pensadas para proporcionar descanso, privacidade e momentos inesquecíveis. Um refúgio para quem deseja desacelerar, apreciar a paisagem e aproveitar o melhor da vida ao ar livre.',
-    image: '/fotos/sobre-varanda-mirante.jpg', imageAlt: 'Varanda da Cabana Mirante com vista para as montanhas ao pôr do sol (imagem ilustrativa)',
+    image: '/fotos/bosque-externa.jpg', imageAlt: 'Cabana Bosque entre as árvores, com varanda e vista para as montanhas ao entardecer (imagem ilustrativa)',
   },
   cabins: [
     { id: 'bosque', name: 'Cabana Bosque', description: 'Um refúgio acolhedor entre as árvores, com arquitetura contemporânea, privacidade e uma vista encantadora da natureza.',
@@ -54,7 +54,6 @@ export const defaultContent: SiteContent = {
     title: 'A propriedade.',
     text: 'Caminhos, jardins e recantos pensados para desacelerar ao ar livre, com a paisagem da serra ao redor.',
     images: [
-      { src: '/fotos/propriedade-cabanas-na-colina.jpg', alt: 'As cabanas na colina, entre árvores e jardins (imagem ilustrativa)' },
       { src: '/fotos/propriedade-quiosque-pergola.jpg', alt: 'Quiosque com pérgola, sofás e luzes aconchegantes (imagem ilustrativa)' },
       { src: '/fotos/propriedade-deck-lago.jpg', alt: 'Deck de madeira à beira do lago (imagem ilustrativa)' },
       { src: '/fotos/propriedade-lago-reflexos.jpg', alt: 'Lago com reflexos do entardecer (imagem ilustrativa)' },

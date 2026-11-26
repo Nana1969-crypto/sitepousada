@@ -76,7 +76,7 @@ function Panel({ onLogout }: { onLogout: () => void }) {
             <Card title="A propriedade (carrossel da área externa)">
               <Field label="Título" value={d.property.title} onChange={(v) => up((c) => (c.property.title = v))} />
               <Field label="Texto" multiline value={d.property.text} onChange={(v) => up((c) => (c.property.text = v))} />
-              <PhotoList photos={d.property.images} placeholder="/fotos/propriedade-cabanas-na-colina.jpg" update={(fn) => up((c) => fn(c.property.images))} />
+              <PhotoList photos={d.property.images} placeholder="/fotos/propriedade-lago-reflexos.jpg" update={(fn) => up((c) => fn(c.property.images))} />
             </Card>
             <Card title="Experiência">
               <Field label="Título da seção" value={d.experience.title} onChange={(v) => up((c) => (c.experience.title = v))} />
@@ -99,7 +99,7 @@ function Panel({ onLogout }: { onLogout: () => void }) {
               <Field label="Descrição" multiline value={cb.description} onChange={(v) => up((c) => (c.cabins[i].description = v))} />
               <Field label="Comodidades (uma por linha)" hint="Liste apenas o que realmente existe. Os itens iniciais são exemplos." multiline rows={6} value={cb.amenities.join('\n')} onChange={(v) => up((c) => (c.cabins[i].amenities = v.split('\n')))} />
               <h3 className="mb-3 font-sans text-sm font-semibold text-stone-700">Fotos do carrossel (a primeira é a capa)</h3>
-              <PhotoList photos={cb.images} placeholder="/fotos/propriedade-cabanas-na-colina.jpg" update={(fn) => up((c) => fn(c.cabins[i].images))} />
+              <PhotoList photos={cb.images} placeholder="/fotos/propriedade-lago-reflexos.jpg" update={(fn) => up((c) => fn(c.cabins[i].images))} />
             </Card>
           ))}
 
