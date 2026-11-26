@@ -47,10 +47,7 @@ export const defaultContent: SiteContent = {
     { id: 'mirante', name: 'Cabana Mirante', description: 'Uma cabana cercada pela paisagem da serra, ideal para contemplar as montanhas, descansar e aproveitar momentos especiais.',
       amenities: ['Vista para as montanhas', 'Deck para contemplação', 'Isolamento e tranquilidade', 'Exemplo editável: lareira ou aquecimento'],
       images: [
-        { src: '/fotos/cabana-mirante-externa.jpg', alt: 'Cabana Mirante — exterior com deck e vista para as montanhas (imagem ilustrativa)' },
-        { src: '/fotos/galeria-mirante-quarto.jpg', alt: 'Cabana Mirante — quarto (imagem ilustrativa)' },
-        { src: '/fotos/galeria-mirante-hidromassagem.jpg', alt: 'Cabana Mirante — banheira de hidromassagem, exemplo a confirmar (imagem ilustrativa)' },
-        { src: '/fotos/galeria-mirante-banheiro.jpg', alt: 'Cabana Mirante — banheiro (imagem ilustrativa)' },
+        { src: '/fotos/mirante-externa.jpg', alt: 'Cabana Mirante — exterior de madeira e pedra com varanda, jardim e vista para as montanhas ao entardecer (imagem ilustrativa)' },
       ] },
   ],
   property: {
