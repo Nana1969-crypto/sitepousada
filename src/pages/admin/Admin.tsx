@@ -7,7 +7,7 @@ import { whatsappLink, onlyDigits } from '../../lib/whatsapp'
 import { Card, Field, ImageField } from './fields'
 import Login from './Login'
 
-const tabs = ['Visão geral', 'Página inicial', 'Acomodações', 'Galeria', 'Contato e localização', 'Configurações'] as const
+const tabs = ['Visão geral', 'Página inicial', 'Acomodações', 'Contato e localização', 'Configurações'] as const
 type Tab = (typeof tabs)[number]
 
 export default function Admin() {
@@ -54,7 +54,7 @@ function Panel({ onLogout }: { onLogout: () => void }) {
             <ul className="mt-4 space-y-2 text-sm">
               <li>{waOk ? '✅' : '⚠️'} WhatsApp: {waOk ? `configurado (${onlyDigits(d.contact.whatsapp)})` : 'ainda não configurado — os botões do site não abrem conversa até você preencher.'}</li>
               <li>{d.location.address ? '✅' : '⚠️'} Endereço: {d.location.address ? 'preenchido' : 'em branco'}</li>
-              <li>{d.gallery.length} fotos na galeria</li>
+              <li>{d.cabins.map((c) => `${c.name}: ${c.images.length} fotos`).join(' · ')}</li>
             </ul>
             <p className="mt-5 rounded-lg bg-amber-50 p-3 text-xs leading-relaxed text-amber-900"><strong>Importante:</strong> neste modo de demonstração as alterações ficam salvas apenas neste navegador. Visitantes do site não as veem. Para publicar de verdade é necessário backend, banco de dados e login no servidor (veja o README).</p>
             <button onClick={() => setTab('Contato e localização')} className="mt-4 text-sm text-forest underline">Configurar WhatsApp</button>
@@ -93,23 +93,20 @@ function Panel({ onLogout }: { onLogout: () => void }) {
               <Field label="Nome" value={cb.name} onChange={(v) => up((c) => (c.cabins[i].name = v))} />
               <Field label="Descrição" multiline value={cb.description} onChange={(v) => up((c) => (c.cabins[i].description = v))} />
               <Field label="Comodidades (uma por linha)" hint="Liste apenas o que realmente existe. Os itens iniciais são exemplos." multiline rows={6} value={cb.amenities.join('\n')} onChange={(v) => up((c) => (c.cabins[i].amenities = v.split('\n')))} />
-              <ImageField label="Foto principal" src={cb.image} alt={cb.imageAlt} onSrc={(v) => up((c) => (c.cabins[i].image = v))} onAlt={(v) => up((c) => (c.cabins[i].imageAlt = v))} />
+              <h3 className="mb-3 font-sans text-sm font-semibold text-stone-700">Fotos do carrossel (a primeira é a capa)</h3>
+              {cb.images.map((im, k) => (
+                <div key={k}>
+                  <ImageField label={`Foto ${k + 1}`} src={im.src} alt={im.alt} onSrc={(v) => up((c) => (c.cabins[i].images[k].src = v))} onAlt={(v) => up((c) => (c.cabins[i].images[k].alt = v))} />
+                  <div className="-mt-3 mb-6 flex flex-wrap gap-2 text-sm">
+                    <button disabled={k === 0} onClick={() => up((c) => { const l = c.cabins[i].images; [l[k - 1], l[k]] = [l[k], l[k - 1]] })} className="min-h-10 rounded border px-3 disabled:opacity-30">↑ Subir</button>
+                    <button disabled={k === cb.images.length - 1} onClick={() => up((c) => { const l = c.cabins[i].images; [l[k + 1], l[k]] = [l[k], l[k + 1]] })} className="min-h-10 rounded border px-3 disabled:opacity-30">↓ Descer</button>
+                    <button onClick={() => up((c) => c.cabins[i].images.splice(k, 1))} className="min-h-10 rounded border border-red-300 px-3 text-red-700">Remover</button>
+                  </div>
+                </div>
+              ))}
+              <button onClick={() => up((c) => c.cabins[i].images.push({ src: '/fotos/galeria-cabanas-na-colina.jpg', alt: 'Nova foto' }))} className="min-h-11 rounded-full border border-forest px-5 text-sm text-forest hover:bg-forest hover:text-white">+ Adicionar foto</button>
             </Card>
           ))}
-
-          {tab === 'Galeria' && <Card title="Fotos da galeria">
-            {d.gallery.map((g, i) => (
-              <div key={g.id}>
-                <ImageField label={`Foto ${i + 1}`} src={g.src} alt={g.alt} onSrc={(v) => up((c) => (c.gallery[i].src = v))} onAlt={(v) => up((c) => (c.gallery[i].alt = v))} />
-                <div className="-mt-3 mb-6 flex gap-2 text-sm">
-                  <button disabled={i === 0} onClick={() => up((c) => { [c.gallery[i - 1], c.gallery[i]] = [c.gallery[i], c.gallery[i - 1]] })} className="rounded border px-3 py-1.5 disabled:opacity-30">↑ Subir</button>
-                  <button disabled={i === d.gallery.length - 1} onClick={() => up((c) => { [c.gallery[i + 1], c.gallery[i]] = [c.gallery[i], c.gallery[i + 1]] })} className="rounded border px-3 py-1.5 disabled:opacity-30">↓ Descer</button>
-                  <button onClick={() => up((c) => c.gallery.splice(i, 1))} className="rounded border border-red-300 px-3 py-1.5 text-red-700">Remover</button>
-                </div>
-              </div>
-            ))}
-            <button onClick={() => up((c) => c.gallery.push({ id: 'g' + Date.now(), src: '/fotos/galeria-cabanas-na-colina.jpg', alt: 'Nova foto' }))} className="min-h-11 rounded-full border border-forest px-5 text-sm text-forest hover:bg-forest hover:text-white">+ Adicionar foto</button>
-          </Card>}
 
           {tab === 'Contato e localização' && <>
             <Card title="WhatsApp e redes">

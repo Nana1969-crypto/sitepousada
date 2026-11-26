@@ -4,7 +4,7 @@ import { defaultContent, type SiteContent } from '../content/defaultContent'
 // PERSISTÊNCIA DE DEMONSTRAÇÃO: grava no localStorage do navegador de quem edita.
 // Outros visitantes NÃO veem as alterações. Para produção é preciso backend + banco + upload de imagens
 // (ver README). Funciona como "camada de dados" trocável: basta reimplementar load/save.
-const KEY = 'refugio.content.v1'
+const KEY = 'refugio.content.v2'
 export const PREVIEW = 'refugio.preview'
 const listeners = new Set<() => void>()
 let cache: SiteContent | null = null

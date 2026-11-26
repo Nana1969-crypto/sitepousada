@@ -1,4 +1,5 @@
 import { useContent } from '../lib/store'
+import { Carousel } from './Carousel'
 import { WaButton } from './WaButton'
 
 export function Cabins() {
@@ -13,7 +14,7 @@ export function Cabins() {
         <div className="space-y-20 lg:space-y-28">
           {cabins.map((c, i) => (
             <article key={c.id} className="grid items-center gap-8 lg:grid-cols-12 lg:gap-14">
-              <img src={c.image} alt={c.imageAlt} loading="lazy" className={`h-auto w-full rounded-sm shadow-xl lg:col-span-7 ${i % 2 ? 'lg:order-2' : ''}`} />
+              <div className={`lg:col-span-7 ${i % 2 ? 'lg:order-2' : ''}`}><Carousel photos={c.images} label={`Fotos da ${c.name}`} /></div>
               <div className="lg:col-span-5">
                 <h3 className="text-3xl text-forest sm:text-4xl">{c.name}</h3>
                 <p className="mt-4 leading-relaxed text-stone-700">{c.description}</p>
