@@ -32,6 +32,7 @@ export const defaultContent: SiteContent = {
     text: 'Em meio à natureza da Serra Gaúcha, nossas cabanas foram pensadas para proporcionar descanso, privacidade e momentos inesquecíveis. Um refúgio para quem deseja desacelerar, apreciar a paisagem e aproveitar o melhor da vida ao ar livre.',
     images: [
       { src: '/fotos/reconectar-bicicletas.jpg', alt: 'Casal pedalando por uma estrada de terra entre araucárias e hortênsias, com montanhas ao fundo (imagem ilustrativa)' },
+      { src: '/fotos/reconectar-balanco-por-do-sol.jpg', alt: 'Mulher de chapéu em um balanço de troncos, de frente para o pôr do sol sobre as montanhas, com araucárias ao lado (imagem ilustrativa)' },
       { src: '/fotos/reconectar-fogueira-noite.jpg', alt: 'Recanto com fogueira à noite, luzes pendentes e cabanas iluminadas na colina ao fundo (imagem ilustrativa)' },
       { src: '/fotos/reconectar-chimarrao-por-do-sol.jpg', alt: 'Banco e poltrona rústicos com chimarrão sobre um toco, diante da vista das montanhas ao pôr do sol (imagem ilustrativa)' },
       { src: '/fotos/reconectar-pesca-no-lago.jpg', alt: 'Pessoa pescando em um lago ao entardecer, com fogueira, balanço, quiosque e cabanas na colina (imagem ilustrativa)' },
