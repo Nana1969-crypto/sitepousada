@@ -35,6 +35,24 @@ export function ImageField({ label, src, alt, onSrc, onAlt }: { label: string; s
     </div>
   )
 }
+export function PhotoList({ photos, update, placeholder }: { photos: { src: string; alt: string }[]; update: (fn: (l: { src: string; alt: string }[]) => void) => void; placeholder: string }) {
+  const b = 'min-h-10 rounded border px-3 text-sm disabled:opacity-30'
+  return (
+    <>
+      {photos.map((im, k) => (
+        <div key={k}>
+          <ImageField label={`Foto ${k + 1}`} src={im.src} alt={im.alt} onSrc={(v) => update((l) => (l[k].src = v))} onAlt={(v) => update((l) => (l[k].alt = v))} />
+          <div className="-mt-3 mb-6 flex flex-wrap gap-2">
+            <button disabled={k === 0} onClick={() => update((l) => { [l[k - 1], l[k]] = [l[k], l[k - 1]] })} className={b}>↑ Subir</button>
+            <button disabled={k === photos.length - 1} onClick={() => update((l) => { [l[k + 1], l[k]] = [l[k], l[k + 1]] })} className={b}>↓ Descer</button>
+            <button onClick={() => update((l) => { l.splice(k, 1) })} className={`${b} border-red-300 text-red-700`}>Remover</button>
+          </div>
+        </div>
+      ))}
+      <button onClick={() => update((l) => { l.push({ src: placeholder, alt: 'Nova foto' }) })} className="min-h-11 rounded-full border border-forest px-5 text-sm text-forest hover:bg-forest hover:text-white">+ Adicionar foto</button>
+    </>
+  )
+}
 export const Card = ({ title, children }: { title: string; children: ReactNode }) => (
   <section className="mb-8 rounded-2xl border border-stone-200 bg-stone-50/60 p-5 sm:p-6">
     <h2 className="mb-5 font-sans text-lg font-semibold text-forest">{title}</h2>{children}

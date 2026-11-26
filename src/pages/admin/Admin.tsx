@@ -4,7 +4,7 @@ import { isLoggedIn, logout, forgetPassword } from '../../lib/auth'
 import { PREVIEW, loadContent, resetContent, saveContent } from '../../lib/store'
 import { defaultContent, type SiteContent } from '../../content/defaultContent'
 import { whatsappLink, onlyDigits } from '../../lib/whatsapp'
-import { Card, Field, ImageField } from './fields'
+import { Card, Field, ImageField, PhotoList } from './fields'
 import Login from './Login'
 
 const tabs = ['Visão geral', 'Página inicial', 'Acomodações', 'Contato e localização', 'Configurações'] as const
@@ -73,6 +73,11 @@ function Panel({ onLogout }: { onLogout: () => void }) {
               <Field label="Texto" multiline rows={5} value={d.about.text} onChange={(v) => up((c) => (c.about.text = v))} />
               <ImageField label="Foto" src={d.about.image} alt={d.about.imageAlt} onSrc={(v) => up((c) => (c.about.image = v))} onAlt={(v) => up((c) => (c.about.imageAlt = v))} />
             </Card>
+            <Card title="A propriedade (carrossel da área externa)">
+              <Field label="Título" value={d.property.title} onChange={(v) => up((c) => (c.property.title = v))} />
+              <Field label="Texto" multiline value={d.property.text} onChange={(v) => up((c) => (c.property.text = v))} />
+              <PhotoList photos={d.property.images} placeholder="/fotos/propriedade-cabanas-na-colina.jpg" update={(fn) => up((c) => fn(c.property.images))} />
+            </Card>
             <Card title="Experiência">
               <Field label="Título da seção" value={d.experience.title} onChange={(v) => up((c) => (c.experience.title = v))} />
               {d.experience.items.map((it, i) => <fieldset key={i} className="mb-6 border-t border-stone-200 pt-4"><legend className="text-sm font-semibold text-stone-600">Benefício {i + 1}</legend>
@@ -94,17 +99,7 @@ function Panel({ onLogout }: { onLogout: () => void }) {
               <Field label="Descrição" multiline value={cb.description} onChange={(v) => up((c) => (c.cabins[i].description = v))} />
               <Field label="Comodidades (uma por linha)" hint="Liste apenas o que realmente existe. Os itens iniciais são exemplos." multiline rows={6} value={cb.amenities.join('\n')} onChange={(v) => up((c) => (c.cabins[i].amenities = v.split('\n')))} />
               <h3 className="mb-3 font-sans text-sm font-semibold text-stone-700">Fotos do carrossel (a primeira é a capa)</h3>
-              {cb.images.map((im, k) => (
-                <div key={k}>
-                  <ImageField label={`Foto ${k + 1}`} src={im.src} alt={im.alt} onSrc={(v) => up((c) => (c.cabins[i].images[k].src = v))} onAlt={(v) => up((c) => (c.cabins[i].images[k].alt = v))} />
-                  <div className="-mt-3 mb-6 flex flex-wrap gap-2 text-sm">
-                    <button disabled={k === 0} onClick={() => up((c) => { const l = c.cabins[i].images; [l[k - 1], l[k]] = [l[k], l[k - 1]] })} className="min-h-10 rounded border px-3 disabled:opacity-30">↑ Subir</button>
-                    <button disabled={k === cb.images.length - 1} onClick={() => up((c) => { const l = c.cabins[i].images; [l[k + 1], l[k]] = [l[k], l[k + 1]] })} className="min-h-10 rounded border px-3 disabled:opacity-30">↓ Descer</button>
-                    <button onClick={() => up((c) => c.cabins[i].images.splice(k, 1))} className="min-h-10 rounded border border-red-300 px-3 text-red-700">Remover</button>
-                  </div>
-                </div>
-              ))}
-              <button onClick={() => up((c) => c.cabins[i].images.push({ src: '/fotos/galeria-cabanas-na-colina.jpg', alt: 'Nova foto' }))} className="min-h-11 rounded-full border border-forest px-5 text-sm text-forest hover:bg-forest hover:text-white">+ Adicionar foto</button>
+              <PhotoList photos={cb.images} placeholder="/fotos/propriedade-cabanas-na-colina.jpg" update={(fn) => up((c) => fn(c.cabins[i].images))} />
             </Card>
           ))}
 

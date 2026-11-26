@@ -9,7 +9,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-5 md:grid-cols-3 lg:px-8">
         <div><p className="font-serif text-2xl text-offwhite">{site.name}</p><p className="mt-3 max-w-xs">{footer.text}</p></div>
         <nav aria-label="Rodapé"><ul className="space-y-2">
-          {[['#inicio', 'Início'], ['#acomodacoes', 'Acomodações'], ['#experiencia', 'Experiência'], ['#localizacao', 'Localização']].map(([h, l]) => <li key={h}><a href={h} className="hover:text-gold">{l}</a></li>)}
+          {[['#inicio', 'Início'], ['#acomodacoes', 'Acomodações'], ['#propriedade', 'Propriedade'], ['#experiencia', 'Experiência'], ['#localizacao', 'Localização']].map(([h, l]) => <li key={h}><a href={h} className="hover:text-gold">{l}</a></li>)}
         </ul></nav>
         <ul className="space-y-2">
           <li>WhatsApp: {wa ? <a href={wa} target="_blank" rel="noopener noreferrer" className="hover:text-gold">{contact.phone || contact.whatsapp}</a> : <span className="opacity-60">a configurar</span>}</li>

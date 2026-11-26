@@ -8,6 +8,7 @@ export interface SiteContent {
   hero: { title: string; subtitle: string; primaryCta: string; secondaryCta: string; image: string; imageAlt: string }
   about: { title: string; text: string; image: string; imageAlt: string }
   cabins: Cabin[]
+  property: { title: string; text: string; images: Photo[] }
   experience: { title: string; items: { title: string; text: string; image: string; imageAlt: string }[] }
   location: { title: string; text: string; address: string; mapUrl: string }
   contact: { whatsapp: string; phone: string; instagram: string; messageCabin: string; messageGeneral: string }
@@ -48,6 +49,18 @@ export const defaultContent: SiteContent = {
         { src: '/fotos/galeria-mirante-banheiro.jpg', alt: 'Cabana Mirante — banheiro (imagem ilustrativa)' },
       ] },
   ],
+  property: {
+    title: 'A propriedade.',
+    text: 'Caminhos, jardins e recantos pensados para desacelerar ao ar livre, com a paisagem da serra ao redor.',
+    images: [
+      { src: '/fotos/propriedade-cabanas-na-colina.jpg', alt: 'As cabanas na colina, entre árvores e jardins (imagem ilustrativa)' },
+      { src: '/fotos/propriedade-quiosque-pergola.jpg', alt: 'Quiosque com pérgola, sofás e luzes aconchegantes (imagem ilustrativa)' },
+      { src: '/fotos/propriedade-deck-lago.jpg', alt: 'Deck de madeira à beira do lago (imagem ilustrativa)' },
+      { src: '/fotos/propriedade-lago-reflexos.jpg', alt: 'Lago com reflexos do entardecer (imagem ilustrativa)' },
+      { src: '/fotos/propriedade-jardim-hortensias.jpg', alt: 'Jardim com hortênsias e pedras (imagem ilustrativa)' },
+      { src: '/fotos/propriedade-montanhas.jpg', alt: 'Montanhas da serra ao entardecer (imagem ilustrativa)' },
+    ],
+  },
   experience: {
     title: 'Mais do que uma hospedagem, uma experiência.',
     items: [
