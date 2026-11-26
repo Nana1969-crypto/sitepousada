@@ -49,7 +49,19 @@ export function PhotoList({ photos, update, placeholder }: { photos: { src: stri
           </div>
         </div>
       ))}
-      <button onClick={() => update((l) => { l.push({ src: placeholder, alt: 'Nova foto' }) })} className="min-h-11 rounded-full border border-forest px-5 text-sm text-forest hover:bg-forest hover:text-white">+ Adicionar foto</button>
+      <div className="flex flex-wrap items-center gap-3">
+        <label className="inline-flex min-h-11 cursor-pointer items-center rounded-full bg-forest px-5 text-sm text-white hover:bg-forest-dark">
+          + Enviar várias fotos
+          <input type="file" accept="image/*" multiple className="sr-only" onChange={async (e) => {
+            const files = Array.from(e.target.files ?? []); e.target.value = ''
+            const imgs: { src: string; alt: string }[] = []
+            for (const f of files) { try { imgs.push({ src: await fileToDataUrl(f), alt: f.name.replace(/\.[^.]+$/, '') }) } catch { /* ignora arquivo inválido */ } }
+            if (imgs.length) update((l) => { l.push(...imgs) })
+          }} />
+        </label>
+        <button onClick={() => update((l) => { l.push({ src: placeholder, alt: 'Nova foto' }) })} className="min-h-11 rounded-full border border-forest px-5 text-sm text-forest hover:bg-forest hover:text-white">+ Adicionar espaço para foto</button>
+      </div>
+      <p className="mt-2 text-xs text-stone-500">{photos.length} fotos. Não há limite de fotos; nesta demonstração, muitas fotos enviadas podem encher o armazenamento do navegador (as imagens são reduzidas automaticamente). Lembre de preencher o texto alternativo.</p>
     </>
   )
 }

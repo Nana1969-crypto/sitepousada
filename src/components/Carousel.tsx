@@ -30,7 +30,7 @@ export function Carousel({ photos, label, priority }: { photos: Photo[]; label: 
       </>}
       </div>
       {n > 1 && (
-        <div className="flex justify-center">
+        <div className="flex flex-wrap items-center justify-center px-3">
           {photos.map((_, k) => (
             <button key={k} type="button" aria-label={`Ir para a foto ${k + 1}`} aria-current={k === i} onClick={() => go(k)} className="flex h-8 w-6 items-center justify-center">
               <span className={`h-2 rounded-full transition-all ${k === i ? 'w-5 bg-white' : 'w-2 bg-white/55'}`} />
@@ -38,6 +38,7 @@ export function Carousel({ photos, label, priority }: { photos: Photo[]; label: 
           ))}
         </div>
       )}
+      {n > 1 && <p className="pb-2 text-center text-xs tabular-nums text-offwhite/60" aria-hidden="true">{i + 1} / {n}</p>}
     </div>
   )
 }

@@ -1,5 +1,5 @@
 /** Redimensiona/comprime a imagem escolhida e devolve um data URL JPEG (cabe melhor no armazenamento do navegador). */
-export function fileToDataUrl(file: File, maxW = 1800, quality = 0.8): Promise<string> {
+export function fileToDataUrl(file: File, maxW = 1400, quality = 0.75): Promise<string> {
   return new Promise((resolve, reject) => {
     if (!file.type.startsWith('image/')) return reject(new Error('Selecione um arquivo de imagem.'))
     const url = URL.createObjectURL(file), img = new Image()
