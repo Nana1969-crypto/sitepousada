@@ -108,7 +108,7 @@ function Panel({ onLogout }: { onLogout: () => void }) {
                 </div>
               </div>
             ))}
-            <button onClick={() => up((c) => c.gallery.push({ id: 'g' + Date.now(), src: '/images/galeria-5.svg', alt: 'Nova foto' }))} className="min-h-11 rounded-full border border-forest px-5 text-sm text-forest hover:bg-forest hover:text-white">+ Adicionar foto</button>
+            <button onClick={() => up((c) => c.gallery.push({ id: 'g' + Date.now(), src: '/fotos/galeria-cabanas-na-colina.jpg', alt: 'Nova foto' }))} className="min-h-11 rounded-full border border-forest px-5 text-sm text-forest hover:bg-forest hover:text-white">+ Adicionar foto</button>
           </Card>}
 
           {tab === 'Contato e localização' && <>

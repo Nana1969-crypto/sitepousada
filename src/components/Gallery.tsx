@@ -26,7 +26,7 @@ export function Gallery() {
       <div className="columns-2 gap-3 sm:gap-4 lg:columns-3">
         {gallery.map((g, i) => (
           <button key={g.id} type="button" aria-label={`Ampliar: ${g.alt}`} onClick={(e) => { opener.current = e.currentTarget; setIdx(i) }} className="group mb-3 block w-full overflow-hidden rounded-sm sm:mb-4">
-            <img src={g.src} alt={g.alt} loading="lazy" className={`w-full object-cover transition duration-500 group-hover:scale-105 ${i % 3 === 0 ? 'aspect-[3/4]' : 'aspect-[4/3]'}`} />
+            <img src={g.src} alt={g.alt} loading="lazy" className="h-auto w-full transition duration-500 group-hover:scale-105" />
           </button>
         ))}
       </div>

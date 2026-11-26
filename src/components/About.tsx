@@ -8,7 +8,7 @@ export function About() {
         <h2 className="text-4xl leading-tight text-forest sm:text-5xl">{about.title}</h2>
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-stone-700">{about.text}</p>
       </div>
-      <img src={about.image} alt={about.imageAlt} loading="lazy" className="aspect-[4/5] w-full rounded-sm object-cover shadow-xl" />
+      <img src={about.image} alt={about.imageAlt} loading="lazy" className="h-auto w-full rounded-sm shadow-xl" />
     </section>
   )
 }
