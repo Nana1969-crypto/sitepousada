@@ -71,7 +71,8 @@ function Panel({ onLogout }: { onLogout: () => void }) {
             <Card title="Apresentação da pousada">
               <Field label="Título" value={d.about.title} onChange={(v) => up((c) => (c.about.title = v))} />
               <Field label="Texto" multiline rows={5} value={d.about.text} onChange={(v) => up((c) => (c.about.text = v))} />
-              <ImageField label="Foto" src={d.about.image} alt={d.about.imageAlt} onSrc={(v) => up((c) => (c.about.image = v))} onAlt={(v) => up((c) => (c.about.imageAlt = v))} />
+              <h3 className="mb-3 font-sans text-sm font-semibold text-stone-700">Fotos do carrossel</h3>
+              <PhotoList photos={d.about.images} placeholder="/fotos/reconectar-bicicletas.jpg" update={(fn) => up((c) => fn(c.about.images))} />
             </Card>
             <Card title="A propriedade (carrossel da área externa)">
               <Field label="Título" value={d.property.title} onChange={(v) => up((c) => (c.property.title = v))} />
